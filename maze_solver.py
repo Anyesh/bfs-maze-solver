@@ -27,16 +27,14 @@ dir4 = [Point(0, -1), Point(0, 1), Point(1, 0), Point(-1, 0)]
 def BFS(s, e):
 
     global img, h, w
-    const = 2000
+    v = [[0 for _ in range(w)] for _ in range(h)]
+    parent = [[Point() for _ in range(w)] for _ in range(h)]
 
-    found = False
-    q = []
-    v = [[0 for j in range(w)] for i in range(h)]
-    parent = [[Point() for j in range(w)] for i in range(h)]
-
-    q.append(s)
+    q = [s]
     v[s.y][s.x] = 1
-    while len(q) > 0:
+    const = 2000
+    found = False
+    while q:
         p = q.pop(0)
 
         for d in dir4:
@@ -63,9 +61,9 @@ def BFS(s, e):
                     del q[:]
                     break
 
-    path = []
     if found:
         p = e
+        path = []
         while p != s:
             path.append(p)
             p = parent[p.y][p.x]
